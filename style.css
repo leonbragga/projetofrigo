@@ -1,0 +1,753 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #c3cacf;
+  height: auto;
+  min-width: 768px;
+}
+
+label {
+  display: inline-block;
+  font-weight: bold;
+}
+
+input {
+  border: 0;
+  display: inline-block;
+  padding: 5px;
+  outline: none;
+}
+
+input[name="nome"],
+input[name="email"] {
+  width: 320px;
+}
+
+input[name="endereco"] {
+  width: 615px;
+}
+
+textarea[name="detalhesdopagamento"] {
+  width: 450px;
+  height: 60px;
+  border: 0;
+  resize: none;
+}
+
+input[name="dataPrimerioPagamento"],
+[name="contrato"],
+[name="nucleo"],
+[name="reurb"] {
+  background-color: #fff;
+  font-weight: bold;
+  width: 140px;
+  color: #000;
+}
+
+input[name="matriz"] {
+  width: 120px;
+}
+
+input[name="comarca"] {
+  width: 200px;
+}
+
+
+input[name="whastapp"] {
+  font-weight: bold;
+  width: 120px;
+}
+
+input[name="dataPrimerioPagamento"]::placeholder,
+[name="whastapp"]::placeholder,
+[name="contrato"]::placeholder,
+[name="nucleo"]::placeholder,
+[name="reurb"]::placeholder {
+  font-weight: normal;
+}
+
+input[type='checkbox'] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input[type='checkbox']:checked+label:before {
+  cursor: pointer;
+  content: "X";
+  display: block;
+  position: relative;
+  left: 2.5px;
+  font-weight: bold;
+}
+
+.op-pagamentos label {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 30%;
+  width: 18px;
+  height: 18px;
+}
+
+input:focus {
+  border-bottom: 1px solid;
+}
+
+table,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+.content {
+  width: 100%;
+  height: auto;
+}
+
+.layout-page {
+  max-width: 793.7px;
+  margin: 5px auto;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 1096.06px;
+  background-color: rgb(255, 255, 255);
+  padding: 5px 40px;
+  position: relative;
+}
+
+.layout-page>.logo>img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+}
+
+.layout-page .title h2 {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.layout-page .info-contrato {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin: 10px 0;
+}
+
+.info-contrato div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info-contrato div{
+  gap: 5px;
+}
+
+
+.layout-page .info-contrato h2 {
+  font-size: 14px;
+  margin: 15px 0;
+}
+
+.layout-page>.cliente-dados {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 14px;
+  gap: 15px;
+}
+
+.contratante div:not(:last-child) {
+  display: flex;
+  gap: 80px;
+}
+
+.estCivil {
+  display: flex;
+  margin-top: 5px;
+  gap: 15px;
+}
+
+.estCivil span {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.custom-radio {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.custom-radio input[type="radio"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-radio label {
+  position: absolute;
+  top: -1px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  border-left: 2px solid #000;
+  border-right: 2px solid #000;
+  border-radius: 35%;
+}
+
+.custom-radio input[type="radio"]:checked+label:before {
+  content: "X";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+.conjuge div:not(:last-child) {
+  display: flex;
+  gap: 80px;
+}
+
+
+.div-second label:last-child {
+  margin-left: 10px;
+}
+
+.layout-page>.informacoes>p {
+  margin-top: 10px;
+  word-break: break-all;
+}
+
+.layout-page>.informacoes>h2 {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.layout-page>.informacoes>.tabela {
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.layout-page>.informacoes>.tabela>table tr td {
+  padding: 10px;
+}
+
+.layout-page>.informacoes>.tabela>table .coluna-pequena {
+  max-width: 350px;
+  padding: 10px;
+  text-align: justify;
+  word-break: keep-all;
+}
+
+.layout-page>.informacoes>.tabela>table .coluna-pequena>h3 {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.op-pagamentos {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  padding: 10px;
+}
+
+.op-pagamentos div {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+
+.op-pagamentos label {
+  margin: 5px;
+}
+
+.layout-page .tabela .pg-2-table-1 {
+  margin: 30px 0;
+}
+
+.layout-page .tabela .pg-2-table-1 tr td h3 {
+  text-align: center;
+}
+
+.layout-page .tabela .pg-2-table-1 tr td:first-child p:nth-child(2) {
+  text-decoration: underline;
+}
+
+.layout-page>.tabela>table tr td {
+  padding: 10px;
+}
+
+.layout-page>.tabela>table tr td * {
+  padding: 3px;
+  font-size: 12px;
+}
+
+.teste p {
+  margin: 20px 0;
+}
+
+.layout-page .tabela table .coluna-pequena {
+  max-width: 550px;
+  padding: 5px;
+  text-align: justify;
+  word-break: normal;
+}
+
+.layout-page>.tabela table .coluna-pequena h3 {
+  font-size: 12px;
+}
+
+.layout-page .clausula {
+  width: 100%;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.layout-page .clausula p {
+  margin: 5px 0;
+}
+
+#p-data {
+  width: 100%;
+  text-align: right;
+  border-bottom: 1px solid;
+  padding: 5px;
+}
+
+.layout-page .assinaturas {
+  width: 100%;
+  text-align: center;
+}
+
+.layout-page .assinaturas p {
+  margin-top: 5px;
+}
+
+.layout-page .assinaturas .assinaturasTop,
+.assinaturasBottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.layout-page .assinaturas .assinatura-1,
+.assinatura-2,
+.assinatura-3,
+.assinatura-4 {
+  width: 280px;
+}
+
+.assinatura-2 {
+  margin-top: -35px;
+}
+
+.sig-pad {
+  position: relative;
+  color: #fff;
+  transition: 0.3s color;
+  width: 300px;
+  height: 150px;
+  border-bottom: 1px solid #000;
+  cursor: pointer;
+}
+
+.sig-pad>img {
+  width: 300px;
+  height: 150px;
+}
+
+.assinatura-2>img {
+  width: 100%;
+  max-width: 250px;
+  height: 140px;
+}
+
+.assinatura-2 p {
+  width: 300px;
+  border-top: 1px solid #000;
+  padding-top: 5px;
+}
+
+.sig-pad:hover {
+  cursor: pointer;
+}
+
+.modalAssinatura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  cursor: url(http://icons.iconarchive.com/icons/designcontest/vintage/32/Patent-Pen-icon.png) 0 30,
+    progress;
+}
+
+.modalAssinatura.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 10;
+}
+
+.modalAssinatura .overlayAssinatura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalAssinatura .canvas {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
+  max-height: 450px;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.button {
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  background-color: #fff;
+}
+
+.canvas .salvar {
+  width: 24px;
+  height: 24px;
+  background-image: url('save.svg');
+  top: 10px;
+  right: 10px;
+}
+
+.canvas .limpar {
+  width: 25px;
+  height: 25px;
+  background-image: url('delete.svg');
+  top: 8px;
+  right: 50px;
+  color: aqua;
+}
+
+.canvas .download1,
+.download2 {
+  width: 27px;
+  height: 27px;
+  background-image: url('download.svg');
+  top: 8px;
+  right: 90px;
+}
+
+.canvas #assinatura2,
+#assinatura3 {
+  display: none;
+}
+
+.canvas .upload {
+  width: 26px;
+  height: 26px;
+  background-image: url('upload.svg');
+  top: 9px;
+  right: 135px;
+}
+
+.layout-page>.rodape {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.layout-page>.rodape img {
+  display: block;
+  margin: 0 auto;
+  max-width: 50%;
+}
+
+.assinaturaCheckin1>img,
+.assinaturaCheckin2>img,
+.assinaturaCheckin3>img,
+.assinaturaCheckin4>img,
+.assinaturaCheckin5>img,
+.assinaturaCheckin6>img,
+.assinaturaCheckin7>img,
+.assinaturaCheckin8>img {
+  width: 150px;
+  height: 120px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+#btn-download-pdf {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  font-weight: bold;
+  color: #00254c;
+  transition: 0.2s background-color;
+  box-shadow: 1px 0px 5px 0px #9fa8ae;
+  z-index: 1;
+}
+
+
+.relatorio {
+  display: none;
+  position: fixed;
+  top: 55px;
+  left: 15px;
+  font-size: 24px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  font-weight: bold;
+  color: #00254c;
+  background-color: #fff;
+  transition: 0.2s background-color;
+  box-shadow: 1px 0px 5px 0px #9fa8ae;
+  z-index: 1;
+}
+
+#btn-anexar-pdf {
+  display: none;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  font-weight: bold;
+  background-color: #fff;
+  color: #00254c;
+  transition: 0.2s background-color;
+  box-shadow: 1px 0px 5px 0px #9fa8ae;
+  z-index: 1;
+}
+
+button:hover, 
+#btn-anexar-pdf:hover {
+  background-color: #9fa8ae;
+}
+
+#picture__input,
+#picture_input_rg_cnh_frente,
+#picture_input_rg_cnh_verso,
+#picture_input_certidao_casamento,
+#picture_input_certidao_nascimento {
+  display: none;
+}
+
+.picture {
+  width: 300px;
+  height: 300px;
+  aspect-ratio: 9/16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: sans-serif;
+  transition: color 300ms ease-in-out, background 300ms ease-in-out;
+  overflow: hidden;
+}
+
+.picture:hover {
+  color: #777;
+  background: #ccc;
+}
+
+.picture:active {
+  border-color: turquoise;
+  color: turquoise;
+  background: #eee;
+}
+
+.picture:focus {
+  color: #777;
+  background: #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.picture__img {
+  max-width: 100%;
+}
+
+.canvas1,
+.canvas2 {
+  max-width: 100%;
+}
+
+button .swal2-confirm.swal2-styled {
+  background-color: #00254c !important;
+}
+
+.rubricaFrigo {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 20px;
+  bottom: 0;
+}
+
+.rubricaFrigo>img {
+  max-width: 100%;
+}
+
+
+.content-document {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.content-document .foto-RG-CNH-frente,
+.content-document .foto-RG-CNH-verso,
+.certidao .picture  {
+  background-color: #ffffff;
+}
+
+.content-document .foto-RG-CNH-frente:hover,
+.content-document .foto-RG-CNH-verso:hover,
+.certidao .picture:hover  {
+  background-color: #8787874f;
+}
+
+
+
+.content-document .foto-RG-CNH-frente .picture,
+.content-document .foto-RG-CNH-verso .picture{
+  width: 500px;
+  height: 300px;
+  /* aspect-ratio: 9/16; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: sans-serif;
+  transition: color 300ms ease-in-out, background 300ms ease-in-out;
+  overflow: hidden;
+}
+
+.picture_image2 img,
+.picture_image3 img,
+.picture_image4 img,
+.picture_image5 img{
+  max-width: 100%;
+}
+
+.content-document .certidao .picture{
+  width: 100%;
+  height: 100%;
+}
+
+.certidao {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: sans-serif;
+  transition: color 300ms ease-in-out, background 300ms ease-in-out;
+  overflow: hidden;
+}
+
+#upload-PDF{
+  display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  .canvas .salvar {
+    width: 40px;
+    height: 40px;
+    top: 10px;
+    right: 5px;
+  }
+
+  .canvas .limpar {
+    width: 40px;
+    height: 40px;
+    right: 55px;
+  }
+
+  .canvas .download1,
+  .download2 {
+    width: 40px;
+    height: 40px;
+    top: 8px;
+    right: 100px;
+  }
+
+  .canvas .upload {
+    width: 40px;
+    height: 40px;
+    top: 8px;
+    right: 150px;
+  }
+
+  #btn-download-pdf,
+  #btn-anexar-pdf {
+    font-size: 32px;
+  }
+
+  .relatorio {
+    top: 75px;
+    font-size: 32px;
+  }
+}

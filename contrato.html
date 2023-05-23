@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
+  <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/pdf-lib"></script>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  <link rel="stylesheet" href="./contrato/sweetalert2.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styleForm.css" />
+  <title>Formulário de contrato</title>
+</head>
+
+<body>
+  <div class="content">
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO:
+          <b><input type="text" id="contrato" name="contrato" disabled oninput="atualizarInformacoes()" /></b>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO:
+            <input type="text" id="nucleo" name="nucleo" placeholder="Texto personalizado"
+              oninput="atualizarInformacoes()" />
+          </label>
+          <label for="reurb">REURB:
+            <input type="text" id="reurb" name="reurb" placeholder="Texto personalizado"
+              oninput="atualizarInformacoes()" />
+          </label>
+        </div>
+      </div>
+      <div class="title">
+        <h2>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ENGENHARIA</h2>
+      </div>
+
+      <div class="cliente-dados">
+        <div class="contratante">
+          <h3>CONTRATANTE:</h3>
+          <label for="nome">Nome:
+            <input type="text" id="nome" name="nome" placeholder="João Souza Campos Nascimento"
+              oninput="atualizarInformacoes()" />
+          </label>
+          <div>
+            <label for="cpf">CPF/CNPJ:
+              <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" />
+            </label>
+            <label for="cep">CEP:
+              <input type="text" id="cep" name="cep" placeholder="69000-000" />
+            </label>
+          </div>
+          <div class="div-second">
+            <label for="telefone">Telefone:
+              <input type="tel" id="telefone" name="telefone" placeholder="(92) 90000-0000" />
+            </label>
+            <label for="profissao">Profissao:
+              <input type="text" id="profissao" name="profissao" placeholder="engenheiro" />
+            </label>
+          </div>
+          <label for="endereco">Endereço:
+            <input type="text" id="endereco" name="endereco" placeholder="Rua sete de setembro, 350, bloco c" />
+          </label>
+          <div class="estCivil">
+            <label for="">Estado Civil:</label>
+            <span>CASADO</span>
+            <div class="custom-radio">
+              <input type="radio" id="radio1" value="1" name="custom-radio"  checked/>
+              <label for="radio1"></label>
+            </div>
+            <span>SOLTEIRO</span>
+            <div class="custom-radio">
+              <input type="radio" id="radio2" value="0" name="custom-radio" />
+              <label for="radio2"></label>
+            </div>
+            <span>VIÚVO</span>
+            <div class="custom-radio">
+              <input type="radio" id="radio3" value="0" name="custom-radio" />
+              <label for="radio3"></label>
+            </div>
+            <span>SEPARADO</span>
+            <div class="custom-radio">
+              <input type="radio" id="radio4" value="0" name="custom-radio" />
+              <label for="radio4"></label>
+            </div>
+            <span>DIVORCIADO</span>
+            <div class="custom-radio">
+              <input type="radio" id="radio5" value="0" name="custom-radio" />
+              <label for="radio5"></label>
+            </div>
+            <span>UNIÃO ESTÁVEL</span>
+            <div class="custom-radio">
+              <input type="radio" id="radio6" value="1" name="custom-radio" />
+              <label for="radio6"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="conjuge">
+          <h3>DADOS CÔNJUGE:</h3>
+          <label for="nome">Nome:
+            <input type="text" id="nome" name="nome" placeholder="Luciana da Silva Nascimento"
+              oninput="atualizarInformacoes()" />
+          </label>
+          <div>
+            <label for="cpf">CPF/CNPJ:
+              <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" />
+            </label>
+            <label for="cep">CEP:
+              <input type="text" id="cep" name="cep" placeholder="69000-000" />
+            </label>
+          </div>
+          <div class="div-second">
+            <label for="telefone">Telefone:
+              <input type="tel" id="telefone" name="telefone" placeholder="(92) 90000-0000" />
+            </label>
+            <label for="profissao">Profissao:
+              <input type="text" id="profissao" name="profissao" placeholder="engenheira" />
+            </label>
+          </div>
+          <label for="endereco">Endereço:
+            <input type="text" id="endereco" name="endereco" placeholder="Rua sete de setembro, 350, bloco c" />
+          </label>
+        </div>
+      </div>
+
+      <div class="informacoes">
+        <p>
+          <b>CONTRATADA: </b>FRIGO ENGENHARIA E CONSULTORIA LTDA, pessoa
+          jurídica de direito privado, CNPJ: 33.496.077/0001-53, com sede na
+          Avenida Presidente Juscelino, 161, Santa Catarina, Criciúma/SC. CEP:
+          88810-421. Neste ato representador por Gilvan Frigo, CPF:
+          089.537.199-50.
+        </p>
+        <p>
+          <b>As partes acima identificadas têm, entre si, justo e acertado o
+            presente Contrato de Prestação de Serviços de Engenharia, que se
+            regerá pelas cláusulas seguintes e pelas condições de pagamento
+            descritas no presente.</b>
+        </p>
+
+        <h2>QUADRO DE RESUMO</h2>
+        <div class="tabela">
+          <table>
+            <tr>
+              <td>
+                <h3>
+                  A prestação de serviço de regularização fundiária dar-se-á
+                  pelo valor de
+                </h3>
+                <label for="valor">R$:
+                  <input type="text" id="valor" name="valor" placeholder="3.000,00" oninput="atualizarInformacoes()" />
+                </label>
+              </td>
+              <td class="coluna-pequena">
+                <h3>DO VALOR REFERENTE À CORRETAGEM</h3>
+                <p>
+                  A transação comercial resultante da prestação de serviço não
+                  tem taxa de corretagem, nos termos da Circular nº 0029/2007
+                  da CGJSC, datada de 14/11/2007.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3>Serão pagos da seguinte forma:</h3>
+
+                <div class="op-pagamentos">
+                  <div>
+                    <span>A Vista</span>
+                    <input type="checkbox" id="avista" name="avista" />
+                    <label for="avista"></label>
+                  </div>
+
+                  <div>
+                    <span>Boletos</span>
+                    <input type="checkbox" id="boleto" name="boleto" />
+                    <label for="boleto"> </label>
+                  </div>
+
+                  <div>
+                    <span>Cartão de Crédito</span>
+                    <input type="checkbox" id="cartao" name="cartao" />
+                    <label for="cartao"> </label>
+                  </div>
+                </div>
+              </td>
+              <td class="coluna-pequena">
+                <h3>DA CORREÇÃO MONETÁRIA</h3>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="rubricaFrigo">
+        <img src="assinaturaFrigo.jpeg" alt="" />
+      </div>
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+      <div class="assinaturaCheckin1"></div>
+    </div>
+
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO: <span class="numeroContrato"></span>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO: <span class="numeroNucleo"></span>
+          </label>
+          <label for="reurb">REURB: <span class="numeroReurb"></span></label>
+        </div>
+      </div>
+
+      <div class="tabela">
+        <table class="pg-2-table-1">
+          <tr>
+            <td>
+              <label for="detalhesdopagamento">Detalhes do pagamento:
+                <textarea name="detalhesdopagamento" id="detalhesdopagamento"
+                  placeholder="texto personalizado"></textarea>
+              </label>
+              <p>
+                Os dados bancários favorecidos à
+                <b>Frigo Engenharia e Consultoria Ltda. do CNPJ:
+                  33.496.077/0001-53</b>
+              </p>
+            </td>
+
+            <td class="coluna-pequena">
+              <p>
+                Correção monetária apenas para hipótese de mora, terá como
+                índice o IGP-M.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h3>DOS JUROS</h3>
+              <p>Não existe a conbrança de juros remuneratórios.</p>
+              <p>
+                Juros moratórios no percentual mensal de 2% (dois por cento)
+              </p>
+            </td>
+
+            <td class="coluna-pequena">
+              <h3>DA IMPOSSIBILIDADE DE ARREPENDIMENTO</h3>
+              <p>
+                O CONTRATANTE renuncia o direito de arrependimento, nos termos
+                da legislação vigente.
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <td>
+              <h3>
+                DO PRAZO PARA QUITAÇÃO DAS OBRIGAÇÕES APÓS A OBTENÇÃO DO TERMO
+                DE VISTORIA DE OBRAS
+              </h3>
+              <p>
+                Não haverá alterações dos valores e vencimentos previstos
+                neste contrato de prestação de serviços (REURB) concluído,
+                ressalvado o disposto na cláusula 7.3
+              </p>
+            </td>
+
+            <td class="coluna-pequena">
+              <h3>INFORMAÇÕES ACERCA DOS ÔNUS QUE RECAIAM SOBRE O IMÓVEL</h3>
+              <p>
+                Não existem ônus sobre o imóvel, caso haja são de
+                responsabilidade exclusiva do CONTRATANTE, na qualidade de
+                propriétario e legítimo posseiro.
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <h3>NÚMERO DO REGISTRO DA MATRÍCULA DO IMÓVEL</h3>
+              <p>
+                O referido imóvel não possui Matrícula individualizada, senão
+                a Matrícula
+              </p>
+              <label for="matriz">Matriz nº:
+                <input type="text" id="matriz" name="matriz" placeholder="" />
+              </label>
+              <span>,do Ofício de Registro de Imóveis da Comarca de</span>
+              <label for="comarca">
+                <input type="text" id="comarca" name="comarca" placeholder="" />
+              </label>
+            </td>
+            <td class="coluna-pequena">
+              <h3>
+                TERMO FINAL PARA A EXECUÇÃO DO PROJETO REFERIDO NO ART. 31 da
+                Lei 13.465/201712 DESTA LEI.
+              </h3>
+              <p>
+                Não há execução pendente, nem ação sobre a área consolidada
+              </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="rubricaFrigo">
+        <img src="assinaturaFrigo.jpeg" alt="" />
+      </div>
+
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+      <div class="assinaturaCheckin2"></div>
+    </div>
+
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO: <span class="numeroContrato"></span>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO: <span class="numeroNucleo"></span>
+          </label>
+          <label for="reurb">REURB: <span class="numeroReurb"></span></label>
+        </div>
+      </div>
+
+      <div class="tabela">
+        <table>
+          <tr>
+            <td class="teste">
+              <h3>
+                DAS CONSEQUÊNCIAS DO DESFAZIMENTO DO CONTRATO, SEJA MEDIANTE
+                DISTRATO, SEJA POR MEIO DE RESOLUÇÃO CONTRATUAL MOTIVADA POR
+                INADIMPLEMENTO DE OBRIGAÇÃO DO CONTRATANTE
+              </h3>
+              <p>
+                I- Não haverá devolução de valores eventualmente pagos, quando
+                a resolução se der por culpa exclusiva do CONTRATANTE, o qual
+                autoriza seja deduzido os valores para abatimento de taxas
+                administrativas, emolumentos de cartório, impostos e outras
+                despesas realizadas com à execução do projeto (REURB).
+              </p>
+              <p>
+                II - Em caso de inadimplência o CONTRATANTE autoriza desde já,
+                a CONTRATADA a realizada a inclusão de seu nome no cadastro de
+                inadimplentes (SPC/SERASA).
+              </p>
+              <p>
+                III- O montante devido por cláusula penal e despesas
+                administrativas, inclusive arras ou sinal, no percentual de
+                10% (dez por cento) do valor atualizado do contrato;
+              </p>
+              <p>
+                IV - Fica atribuído aquele que der causa a rescisão os
+                encargos moratórios relativos às prestações pagas em atraso
+                pelo adquirente;
+              </p>
+              <p>
+                V - É de responsabilidade da CONTRATANTE os débitos de
+                impostos sobre a propriedade, contribuições condominiais,
+                associativas ou outras de igual natureza que sejam a estas
+                equiparadas e tarifas vinculadas ao lote, bem como tributos,
+                custas e emolumentos incidentes sobre a restituição e/ou
+                rescisão;
+              </p>
+            </td>
+
+            <td class="coluna-pequena">
+              <h3>
+                DAS CONSEQUÊNCIAS DO —“DESFAZIMENTO DO CONTRATO, SEJA MEDIANTE
+                DISTRATO, SEJA POR MEIO DE RESOLUÇÃO CONTRATUAL MOTIVADA POR
+                INADIMPLEMENTO DE OBRIGAÇÃO DA CONTRATADA
+              </h3>
+              <p>
+                Não haverá responsabilidade indenizatória em razão do
+                descumprimento das obrigações contratuais referente a REURB,
+                porquanto a execução depende exclusivamente — das liberações
+                dos órgãos públicos. Ressalvado o direito indenizatório ao
+                CONTRATANTE — em caso de ineficiência na prestação de serviço
+                ou abandono da regularização fundiária.
+              </p>
+              <h3>DO PRAZO DE PRESTAÇÃO DE SERVIÇO</h3>
+              <p>
+                O presente contrato de regularização fundiária tem como
+                premissa a regularização dentro do prazo de 300 dias,
+                equivalente a 10 meses,a partir da data de assinatura deste
+                instrumento.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="clausula">
+        <h3><b></b> CLÁUSULA PRIMEIRA - DO OBJETO DO CONTRATO</h3>
+        <p>
+          <b>1.1</b> O presente contrato tem como OBJETO, a prestação, pelo
+          CONTRATADA, dos serviços de ENGENHARIA, AGRIMENSURA, TOPOGRAFIA E
+          PROJETOS, à CONTRATANTE, a fim de que esta possa elaborar seu
+          projeto de REGULARIZAÇÃO FUNDIÁRIA URBANA, DA SUA UNIDADE
+          IMOBILIÁRIA (LOTE), DENTRO DO REFERIDO NÚCLEO URBANO CLANDESTINO OU
+          IRREGULAR:
+        </p>
+      </div>
+      <div class="rubricaFrigo">
+        <img src="assinaturaFrigo.jpeg" alt="" />
+      </div>
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+      <div class="assinaturaCheckin3"></div>
+    </div>
+
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO: <span class="numeroContrato"></span>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO: <span class="numeroNucleo"></span>
+          </label>
+          <label for="reurb">REURB: <span class="numeroReurb"></span></label>
+        </div>
+      </div>
+
+      <div class="clausula">
+        <h3><b></b> CLÁUSULA SEGUNDA - DA PRESTAÇÃO DE SERVIÇOS</h3>
+        <p>
+          <b>2.1.</b> A prestação de serviço comtemplada neste instrumento
+          consistem nos seguintes serviços:
+        </p>
+        <p>
+          <b>(a)</b> Levantamento topográfico planialtimétrico cadastral
+          georreferenciado (mapeamento);
+        </p>
+        <p>
+          <b>(b)</b> Estudo das desconformidades jurídicas, urbanísticas e
+          ambientais;
+        </p>
+        <p>
+          <b>(c) </b> Elaboração do projeto urbanístico de Regularização
+          Fundiária Urbana;
+        </p>
+        <p>
+          <b>(d)</b> Elaboração do processo administrativo de regularização
+          fundiária urbana;
+        </p>
+        <p>
+          <b>(e)</b> Encaminhamento para aprovação junto a Prefeitura
+          Municipal;
+        </p>
+        <p><b>(f)</b> Encaminhamento do processo ao Registro de Imóveis.</p>
+      </div>
+
+      <span><b>Parágrafo Único:</b> A prestação de serviços delimitada neste
+        instrumento se caracteriza como atividade meio, cuja obrigação se
+        restringe a qualidade das atividades realizadas, de modo a garantir
+        que todo o serviço tenha sido prestado de maneira adequada e
+        condizente com a legislação, ficando a CONTRATADA responsável pelo
+        sucesso do procedimento e condicionada a aprovação definitiva dos
+        órgãos públicos competentes.</span>
+
+      <div class="clausula">
+        <h3>CLÁUSULA TERCEIRA - DA FORMA E CONDIÇÃO DE PAGAMENTO</h3>
+        <p>
+          <b>3.1.</b> Pela prestação dos serviços fica ajustado entre as
+          partes, que a CONTRATANTE pagará ao CONTRATADA à quantia de
+          <b id="valorContrato">valor contrato</b>, cujo crédito fundar-se-á
+          desde logo em título de obrigação certa, líquida e exigível, em
+          moeda corrente, da seguinte forma e condições, com vencimento
+          inicial na data de
+          <label for="dataPrimerioPagamento">
+            <input type="text" id="dataPrimerioPagamento" name="dataPrimerioPagamento"
+              placeholder="Texto personalizado." />
+          </label>
+        </p>
+        <p>
+          <b>3.2.</b> Os boletos serão enviados via WhatsApp<label for="whastapp">
+            <input type="text" id="whastapp" name="whastapp" placeholder="(92) 90000-0000." /> </label>,e/ou e-mail: <b
+            id="emailBoleto"></b>, podendo ser retirado na
+          sede da empresa.
+        </p>
+
+        <p>
+          <b> 3.3.</b> Os pagamentos serão realizados diretamente para a
+          CONTRATADA, em moeda corrente, mediante recibo, pagamento via
+          boleto, PIX, cartão de débito ou crédito.
+        </p>
+        <p>
+          <b>3.4.</b> O não pagamento de qualquer parcela no seu vencimento
+          importará no vencimento integral e antecipado do débito, sujeitando
+          o (a) CONTRATANTE, além da execução do presente instrumento, ao
+          pagamento do valor integral do débito, sobre o qual incidirá a
+          aplicação de multa de 10% (dez por cento), sobre o valor integral do
+          contrato, acrescido de correção monetária pelo IGPM/FGV e juros de
+          mora de 2% (dois por cento).
+        </p>
+        <p>
+          <b>3.5.</b> Fica a CONTRATADA autorizada em caso de inadimplência
+          incluir o nome do devedor no órgão de proteção de crédito e/ou
+          cartório, independente de notificação ou interpelação judicial.
+        </p>
+      </div>
+
+      <div class="clausula">
+        <h3>CLÁUSULA QUARTA - DO PRAZO</h3>
+        <p>
+          <b>4.1.</b> O presente contrato de regularização fundiária tem como
+          premissa a regularização dentro do prazo de 300 (trezentos) dias,
+          equivalente a 10 (dez) meses, a partir da data de assinatura deste
+          instrumento, podendo ser prorrogado, de comum acordo entre as
+          partes, mediante assinatura de termo aditivo.
+        </p>
+        <p>
+          <b>4.2.</b> O prazo descrito na cláusula retro, poderá ser suspenso,
+          se configurada quaisquer das seguintes situações:
+        </p>
+        <p>
+          <b>(a)</b> Morosidade de análise do procedimento pela Prefeitura
+          Municipal ou pelo Cartório de Registro de Imóveis competente;
+        </p>
+        <p>
+          <b>(b)</b> Atraso na entrega dos documentos descritos no parágrafo
+          único da Cláusula 5.2;
+        </p>
+        <p>
+          <b>(c) </b> Inadimplemento das taxas administrativas descritas na
+          Cláusula 5.8;
+        </p>
+        <p>
+          <b>(d)</b> Na eventualidade de recair quaisquer ônus, ações ou
+          restrições sobre o imóvel em que o núcleo urbano está inserido;
+        </p>
+      </div>
+
+      <div class="rubricaFrigo">
+        <img src="assinaturaFrigo.jpeg" alt="" />
+      </div>
+
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+      <div class="assinaturaCheckin4"></div>
+    </div>
+
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO: <span class="numeroContrato"></span>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO: <span class="numeroNucleo"></span>
+          </label>
+          <label for="reurb">REURB: <span class="numeroReurb"></span></label>
+        </div>
+      </div>
+
+      <div class="clausula">
+        <h3>CLÁUSULA QUINTA - DAS RESPONSABILIDADES</h3>
+        <p>
+          <b>5.1.</b> A CONTRATANTE se obriga a fornecer à CONTRATADA todas as
+          informações e documentação necessárias à prestação dos serviços ora
+          contratados, as informações, documentos e materiais necessários para
+          a execução das atividades, de forma clara e compreensível. A
+          veracidade das informações fornecidas e declaradas é de inteira
+          responsabilidade do CONTRATANTE, isentando-se a CONTRATADA de
+          qualquer prejuízo cuja causa esteja relacionada ao descumprimento
+          das obrigações a ora convencionadas.
+        </p>
+        <p>
+          <b>5.2.</b> A não entrega de informações e documentações no prazo de
+          40 (quarenta) dias, culminará na rescisão contratual, caso não haja
+          comunicação prévia a CONTRATADA, inclusive com a aplicação da multa
+          rescisória contratual. O silencio será interpretado como
+          concordância.
+        </p>
+        <p>
+          <b>Parágrafo Único:</b> A critério da CONTRADA e mediante sua
+          manifestação expressa, as consequências pela não entrega das
+          documentações requisitadas poderão ser mitigadas, desde que não
+          causem prejuízos aos serviços contratados e que o prazo previsto na
+          Cláusula 4.2 seja renovado, com marco inicial a partir de
+          cumprimento desta obrigação.
+        </p>
+        <p>
+          <b>5.3.</b> As partes obrigam-se a manter sigilo sobre todos os
+          termos e condições deste instrumento, bem como cerca de quaisquer
+          informações, materiais, documentos, especificações técnicas ou
+          comerciais, projetos, orçamentos ou quaisquer outros dados ou
+          informações gerais que, em razão do presente contrato venham a ter
+          acesso ou conhecimento, ou ainda que lhes tenham sido confiados, não
+          podendo sob qualquer pretexto, revelar, reproduzir ou deles dar
+          conhecimento a terceiros.
+        </p>
+        <p>
+          <b>5.4.</b> A CONTRATANTE declara que não existem ônus, ações,
+          execuções ou gravames de qualquer natureza sobre o imóvel descrito
+          neste instrumento, ficando integralmente responsável pela eventual
+          incidência de tais restrições.
+        </p>
+        <p>
+          <b>5.5.</b> Na hipótese da prestação de serviços da CONTRATADA ser
+          comprometida pela imposição de ônus e restrições sob o imóvel objeto
+          deste contrato, seja por fato superveniente ou cuja origem era
+          desconhecida quando da celebração deste pacto, o contrato poderá ser
+          rescindido de pleno direito, a critério da CONTRATADA, ficando a
+          CONTRATANTE responsável pelo pagamento do proporcional ao serviço
+          prestado e retenção dos valores já adimplidos, sem prejuízo de
+          eventual indenização por perdas e danos.
+        </p>
+        <p>
+          <b>Parágrafo Único:</b> Caso a CONTRATADA verifique a existência de
+          alguma possibilidade jurídica para resolução do impasse descrito
+          nesta cláusula, poderá decidir pela vigência do contrato, desde que
+          isso não implique em prejuízo aos demais lotes do núcleo urbano
+          consolidado, e se adimplido o valor adicional pelo serviço a ser
+          prestado, o que será definido mediante termo aditivo.
+        </p>
+        <p>
+          <b>5.6.</b> A CONTRATANTE reconhece a inexistência de
+          responsabilidade indenizatória da CONTRATADA, pelo eventual
+          descumprimento das obrigações contratuais cuja origem fica
+          condicionada as liberações pelos órgãos públicos competentes, em
+          especial a prefeitura do município e cartório de registro de imóveis
+          competente, estando sua responsabilidade adstrita a hipótese de
+          ineficiência e falha na prestação de serviços, ou pelo abandono do
+          procedimento de regularização fundiária.
+        </p>
+      </div>
+
+      <div class="rubricaFrigo">
+        <img src="assinaturaFrigo.jpeg" alt="" />
+      </div>
+
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+      <div class="assinaturaCheckin5"></div>
+    </div>
+
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO: <span class="numeroContrato"></span>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO: <span class="numeroNucleo"></span>
+          </label>
+          <label for="reurb">REURB: <span class="numeroReurb"></span></label>
+        </div>
+      </div>
+
+      <div class="clausula">
+        <p>
+          <b>Parágrafo Único:</b> Não haverá qualquer responsabilidade civil
+          ou direito de reembolso em caso de indeferimento do procedimento de
+          regularização, por razões alheias ao serviço prestado pela
+          CONTRATADA.
+        </p>
+        <p>
+          <b>5.7.</b> A CONTRATADA responderá pela exatidão dos projetos
+          aprovados que entregar à CONTRATANTE e pela sua total afinidade com
+          as exigências formais mínimas dos poderes públicos competentes.
+        </p>
+        <p>
+          <b>5.8.</b> A CONTRATANTE declara ter plena ciência acerca dos
+          custos do procedimento de REURB a ser cobrado pelos órgãos públicos,
+          em especial àqueles de competência pelo Cartório de Registro de
+          Imóveis, responsabilizando-se pelo pagamento da integralidade das
+          taxas, sob pena de paralisação do procedimento, suspensão do prazo
+          da Cláusula 4.1 e eventual indenização pelas perdas e danos causados
+          aos demais integrantes do núcleo objeto de regularização.
+        </p>
+        <p>
+          <b>Parágrafo Primeiro:</b> Caso o atraso no pagamento dos débitos
+          descrito nesta cláusula, se perpetue por período superior a 03
+          (três) meses, os serviços contratados serão considerados
+          integralmente cumpridos, extinguindo este instrumento em razão
+          cumprimento da obrigação, e isentando tacitamente a CONTRATADA da
+          realização das demais atividades, sem que isso implique em qualquer
+          redução ou renúncia ao valor descrito na Cláusula Terceira
+        </p>
+        <p>
+          <b>Parágrafo Segundo:</b> A CONTRATADA poderá, a seu livre critério,
+          arcar com o pagamento das taxas acima descritas, com o objetivo de
+          finalizar o procedimento de regularização, resguardando-se no
+          direito de cobrar estes valores da parte inadimplente, por meio da
+          judicial pertinente, caracterizando-se este contrato e as
+          respectivas notas fiscais como título executivo extrajudicial.
+        </p>
+        <p>
+          <b>5.9.</b> A partir da assinatura deste contrato, a CONTRATANTE
+          assume a responsabilidade de não contratar outros serviços que visem
+          a regularização do lote descrito neste preâmbulo, sejam eles
+          judiciais ou extrajudiciais, ou se já contratados, a desistir de
+          eventual ação ou procedimento administrativo, sob o risco de
+          prejudicar o andamento da regularização via REURB.
+        </p>
+        <p>
+          <b>Parágrafo Único:</b> Na hipótese de descumprimento desta
+          cláusula, o contrato dar-se-á por rescindido, sendo o lote da
+          CONTRATANTE imediatamente excluído do procedimento, sem prejuízo da
+          cobrança dos valores aqui pactuados e incidência de multa
+          equivalente a 10% (dez) por cento sobre o valor do contrato.
+        </p>
+      </div>
+
+      <div class="clausula">
+        <h3>CLÁUSULA SEXTA - DO DIREITO DE USO DE IMAGEM</h3>
+        <p>
+          <b>6.1.</b> O (a) CONTRATANTE autoriza à CONTRATADA usar a sua
+          imagem nas redes sociais da CONTRATADA, eventos, publicidade,
+          facebook, instagram, aplicativo de whastapp, outdoor, folder,
+          e-mails, mídias eletrônicas, jornais e outras não previstas neste
+          instrumento contratual, sendo vedado o uso para fins ilícitos.
+        </p>
+      </div>
+
+      <div class="clausula">
+        <h3>
+          CLÁUSULA SÉTIMA - DO DIREITO DE USO DE DOCUMENTOS FISCAIS E SEU
+          MANUSEIO
+        </h3>
+        <p>
+          <b> 7.1.</b> O (a) CONTRATANTE autoriza à CONTRATADA a manusear todo
+          e qualquer documento fiscal de cunho pessoal, tais como Carteira
+          Nacional de Habilitação, Cédula de identidade, CPF, comprovante de
+          endereço, Certidão de Nascimento, Certidão de Casamento, Certidão de
+          óbito e outras, porventura depositada sobre a confiança da
+          CONTRATADA, podendo utilizar e usar para todos os fins executórios
+          atribuídos a prestação de serviço de regularização fundiária urbana,
+          regularizações cadastrais e/ou cadastros nos órgãos pertinentes,
+          loteamento e outros, exceto para fins ilícitos. (lei nº
+          13.709/2019).
+        </p>
+        <p>
+          <b>7.2.</b> O (a) CONTRATANTE ainda, autoriza à CONTRATADA e seus
+          colaboradores além de manusear os documentos ficais acima citado, a
+          fornecer cópia ou fotocópia aos estabelecimentos públicos,
+          prefeituras, Detran, assistente social, a comissão de regularização
+          fundiária, cartório e outros órgão públicos ou privados não
+          previstos neste instrumento particular.
+        </p>
+      </div>
+
+      <div class="rubricaFrigo">
+        <img src="assinaturaFrigo.jpeg" alt="" />
+      </div>
+
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+      <div class="assinaturaCheckin6"></div>
+    </div>
+
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO: <span class="numeroContrato"></span>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO: <span class="numeroNucleo"></span>
+          </label>
+          <label for="reurb">REURB: <span class="numeroReurb"></span></label>
+        </div>
+      </div>
+
+      <div class="clausula">
+        <h3>CLÁUSULA OITAVA - DAS DEPESAS</h3>
+        <p>
+          <b>8.1</b> Toda e qualquer despesa adicional ou excedente, não
+          prevista no disposto na cláusula 2.1, entre elas são as (taxas e
+          emolumentos referentes a aprovação, registros, reconhecimento de
+          firma, autenticação, certidões de matrícula, taxa da ART-Anotação de
+          Responsabilidade Técnica e outros não previstas nesse contrato), que
+          não estão incluídas no valor da prestação de serviço ora contratado
+          mas que venham a incidir ou onerar a presente prestação dos
+          serviços, serão reembolsadas pela CONTRATANTE à CONTRATADA.
+        </p>
+        <p>
+          <b>8.2.</b> Fica estabelecido entre as partes que a inexecução do
+          projeto e/ou Certidão de Regularização Fundiária (CRF), saneamento
+          administrativo, por prazo superior a 300(trezentos) dias após a
+          contratação da prestação de serviço por ato exclusivo da
+          municipalidade decorrente de diligência ou outras necessidades, não
+          ensejarão responsabilidade técnica, jurídica ou de natureza
+          indenizatória à CONTRATADA.
+        </p>
+        <p>
+          <b>8.3.</b> Fica acordado entre as partes, que após 12 (doze) meses,
+          contados a partir da data do protocolo na municipalidade, a presente
+          prestação de serviço será reajustada pelo Índice Geral de Preços do
+          Mercado IGP-M).
+        </p>
+      </div>
+
+      <div class="clausula">
+        <h3>CLÁUSULA NONA - DA RECISÃO CONTRATUAL</h3>
+        <p>
+          <b>9.1.</b> O descumprimento de quaisquer das cláusulas
+          estabelecidas neste contrato, ensejara a rescisão contratual de
+          pleno independentemente de notificação e/ou interpelação judicial,
+          sem prejuízo das hipóteses de rescisão já delimitadas.
+        </p>
+        <p>
+          <b>9.2.</b> Fica estabelecido entres as partes, desde já, que aquele
+          que der causa a rescisão contratual, pagará a parte inocente o
+          percentual de 10% (dez por cento) a título de cláusula penal, além
+          de arcar com as custas processuais e honorários advocatícios no
+          percentual de 20% (vinte por cento).
+        </p>
+        <p>
+          <b>9.3.</b> Em caso de rescisão contratual por desistência do
+          CONTRATANTE, fica pactuado que não haverá direito a reembolso dos
+          valores já pagos, servindo este saldo como compensação pelos
+          serviços prestados, sem prejuízo da incidência de multa equivalente
+          a 20% (vinte por cento) do saldo remanescente.
+        </p>
+      </div>
+
+      <div class="clausula">
+        <h3>CLÁSULA DÉCIMA - DA LEI GERAL DE PROTEÇÃO DE DADOS</h3>
+        <p>
+          <b>10.1.</b> As partes obrigam-se a atuar no presente contrato em
+          conformidade com a legislação vigente acerca da proteção de dados
+          pessoais e as determinações dos órgãos reguladores/fiscalizadores
+          sobre a matéria, em especial a Lei 13.709/2018, além das demais
+          normas e políticas de proteção de dados de cada país onde houver
+          qualquer tipo de tratamento dos dados aqui convencionados.
+        </p>
+        <p><b>10.2.</b> No manuseio dos dados, as partes deverão:</p>
+        <p>
+          <b>(a)</b> Tratar os dados pessoais a que tiverem acesso apenas de
+          acordo com os fins pretendidos por meio deste instrumento
+          contratual, e em conformidade com estas cláusulas, e que, na
+          eventualidade de não poder cumprir com estas obrigações, por
+          qualquer razão, concorda em informar de maneira formal este fato
+          imediatamente a parte adversa, por meio de e-mail ou outro meio de
+          comunicação convencionado.
+        </p>
+        <p>
+          <b>(b)</b> Manter e utilizar medidas de segurança administrativas,
+          técnicas e físicas apropriadas e suficientes para proteger a
+          confidencialidade e integridade de todos os dados pessoais mantidos
+          ou consultados/transmitidos eletronicamente, para garantir a
+          proteção desses dados contra acesso não autorizado, destruição, uso,
+          modificação, divulgação ou perda acidente ou indevida.
+        </p>
+        <p>
+          <b>(c) </b> Manter e utilizar medidas de segurança administrativas,
+          técnicas e físicas apropriadas e suficientes para proteger a
+          confidencialidade e integridade de todos os dados pessoais mantidos
+          ou consultados/transmitidos eletronicamente, para garantir a
+          proteção desses dados contra acesso não autorizado, destruição, uso,
+          modificação, divulgação ou perda acidente ou indevida.
+        </p>
+      </div>
+
+      <div class="rubricaFrigo">
+        <img src="assinaturaFrigo.jpeg" alt="" />
+      </div>
+
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+      <div class="assinaturaCheckin7"></div>
+    </div>
+
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO: <span class="numeroContrato"></span>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO: <span class="numeroNucleo"></span>
+          </label>
+          <label for="reurb">REURB: <span class="numeroReurb"></span></label>
+        </div>
+      </div>
+
+      <div class="clausula">
+        <h3>CLÁUSULA DÉCIMA PRIMEIRA - DAS DISPOSIÇÕES GERAIS E FINAIS</h3>
+        <p>
+          <b>11.1</b> Ocorrendo a transferência dos serviços para outra
+          Empresa de engenharia, a CONTRATANTE deverá informar a CONTRATADA,
+          por escrito, seu nome, endereço, nome do responsável e número da
+          inscrição junto ao Conselho Regional de Engenharia, sem o que não
+          será possível à CONTRATADA cumprir as formalidade
+          ético-profissional, inclusive a transmissão de dados e informações
+          necessárias à continuidade dos serviços, em relação às quais, diante
+          da eventual inércia da CONTRATANTE, estará desobrigada de
+          cumprimento.
+        </p>
+        <p>
+          <b>11.2.</b> No caso de rescisão, a dispensa pelo CONTRATANTE da
+          execução de quaisquer serviços, seja qual for a razão, durante o
+          prazo do pré-aviso, deverá ser feita por escrito, não a desobrigando
+          do pagamento dos honorários integrais até o termo final do contrato.
+        </p>
+        <p>
+          <b>11.3.</b> Entre os dados e informações as serem fornecidos não se
+          incluem detalhes técnicos dos sistemas de informática da CONTRATADA,
+          os quais são de sua exclusiva responsabilidade.
+        </p>
+        <p>
+          <b>11.4</b> A falência ou a concordata da CONTRATANTE facultará a
+          rescisão do presente contrato pela CONTRATADA, independentemente de
+          notificação judicial ou extrajudicial, não estando incluídos nos
+          serviços ora pactuados.
+        </p>
+        <p>
+          <b>11.5.</b> O presente contrato ainda poderá ser rescindido
+          motivadamente, caso qualquer das partes contratantes venha a
+          infringir cláusula ou condição ora convencionada, constituindo o
+          inadimplemento contratual condição resolutiva do presente,
+          operando-se de pleno direito, mediante mera notificação
+          extrajudicial, inclusive admitida a via postal com aviso de
+          recebimento.
+        </p>
+        <p>
+          <b>11.6.</b> A parte que der causa à rescisão motivada, sem prejuízo
+          da penalidade específica do já avençado acima, responderá pelas
+          perdas e danos nos termos do artigo 389 do Código Civil.
+        </p>
+        <p>
+          <b>11.7</b> A eventual alteração do objeto do presente contrato
+          deve, necessariamente, constar de termo aditivo ao presente
+          contrato.
+        </p>
+        <p>
+          <b>11.8.</b> o presente contrato terá força de título executivo
+          extrajudicial, legitimando assim, o competente processo de execução
+          no caso de descumprimento de quaisquer de suas cláusulas.
+        </p>
+        <p>
+          <b>11.9.</b> Para todos os fins e efeitos de direito, o presente
+          contrato é firmado em caráter irretratável e irrevogável, obrigando
+          as partes, em todos os seus termos, cláusulas e condições, por si,
+          seus herdeiros e sucessores, devendo ser integralmente respeitado.
+        </p>
+        <p>
+          <b>11.10.</b> Qualquer tolerância das partes aqui qualificadas, a
+          respeito da cobrança de multa, acréscimo ou exigência de cumprimento
+          das obrigações pactuadas neste contrato, não implicará em renúncia
+          ao direito ou induzirá a novação, procedente ou alteração das
+          cláusula delimitadas, sendo tais fatos levados à conta da simples
+          liberalidade.
+        </p>
+        <p>
+          <b>11.11.</b> A CONTRATADA poderá subcontratar outros profissionais
+          de sua confiança para auxiliar e desenvolver parte da execução dos
+          trabalhos, porém todos os custos inerentes a esta contratação
+          correrá sob suas únicas expensas, sem nenhum custa para a ora
+          CONTRATANTE.
+        </p>
+        <p>
+          <b>11.12.</b> O presente instrumento particular de prestação de
+          serviço tem vigência por prazo indeterminado.
+        </p>
+      </div>
+      <div class="clausula">
+        <h3>CLÁUSULA DÉCIMA SEGUNDA - DO FORO</h3>
+        <p>
+          <b>12.1.</b> As partes elegem o foro de Criciúma (SC), com renúncia
+          expressa de qualquer outro, por mais privilegiado que seja para
+          dirimir qualquer controvérsia oriunda do presente contrato.
+        </p>
+        <p>
+          <b>12.2.</b> E, por estarem assim justos e contratados, assinam o
+          presente instrumento em duas (02) vias de igual teor e forma, para
+          que produza seus efeitos legais, juntamente com duas (02)
+          testemunhas que também assinam, dado tudo por bom, firme e valioso.
+        </p>
+      </div>
+
+      <p id="p-data">
+        <b>Criciúma/SC - <span id="data"></span></b>
+      </p>
+
+      <div class="rubricaFrigo">
+        <img src="assinaturaFrigo.jpeg" alt="" />
+      </div>
+
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+      <div class="assinaturaCheckin8"></div>
+    </div>
+
+    <div class="layout-page">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+      </div>
+      <div class="info-contrato">
+        <label for="contrato">Nº CONTRATO: <span class="numeroContrato"></span>
+        </label>
+        <div>
+          <label for="nucleo">NÚCLEO: <span class="numeroNucleo"></span>
+          </label>
+          <label for="reurb">REURB: <span class="numeroReurb"></span></label>
+        </div>
+      </div>
+
+      <div class="assinaturas">
+        <div class="assinaturasTop">
+          <div class="assinatura-1">
+            <div class="fotoAssinatura">
+              <label class="picture" for="picture__input" tabindex="0">
+                <span class="picture__image">Incluir imagem</span>
+              </label>
+              <input type="file" name="picture__input" id="picture__input" accept="image/png, image/jpeg" />
+            </div>
+            <div class="sig-pad invalido" id="abrirSignaturePad" onclick="abrirSignaturePad()"></div>
+            <p>(Contratante)</p>
+            <b><span id="nomeCliente"></span></b>
+          </div>
+        </div>
+
+        <div class="assinaturasBottom">
+          <div class="assinatura-2">
+            <img src="assinaturaFrigo.jpeg" alt="" />
+            <p>(Contratada)</p>
+            <span><b>FRIGO ENGENHARIA E CONSULTORIA LTDA</b></span>
+          </div>
+
+          <div class="assinatura-4">
+            <div class="sig-pad invalido" id="abrirSignaturePad3" onclick="abrirSignaturePad3()"></div>
+            <p>Testemunha</p>
+            <label for="nomeTestemunha02">Nome:
+              <input type="text" id="nomeTestemunha02" name="nomeTestemunha02" placeholder="Texto personalizado" />
+            </label>
+            <label for="cpfTestemunha">CPF:
+              <input type="text" id="cpfTestemunha" name="cpfTestemunha" placeholder="Texto personalizado" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modalAssinatura" id="js-modalAssinatura">
+        <div class="overlayAssinatura">
+          <div class="canvas">
+            <button class="salvar button" id="salvar" onclick="salvarSignaturePad()"></button>
+            <button class="limpar button" onclick="limparSignaturePad()"></button>
+            <canvas id="signature1" name="signature1" width="900" height="450">
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="modalAssinatura" id="js-modalAssinatura3">
+        <div class="overlayAssinatura">
+          <div class="canvas">
+            <span class="canvas2"></span>
+            <button class="salvar button" id="salvar" onclick="salvarSignaturePad3()"></button>
+            <button class="limpar button" onclick="limparSignaturePad3()"></button>
+            <a href="" class="download2 button" download="assinatura" onclick="baixarAssinatura2()"></a>
+            <label for="assinatura3" class="upload button" tabindex="0"></label>
+            <input type="file" name="assinatura3" id="assinatura3" accept="image/png, image/jpeg" />
+            <canvas id="signature3" name="signature3" width="900" height="450">
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <div class="rodape">
+        <img src="endereco.png" alt="" />
+      </div>
+    </div>
+
+    <div class="layout-page">
+
+      <div class="content-document">
+        <div class="foto-RG-CNH-frente">
+          <label class="picture" for="picture_input_rg_cnh_frente" tabindex="0">
+            <span class="picture_image2">RG OU CNH FRENTE</span>
+          </label>
+          <input type="file" name="picture_input_rg_cnh_frente" id="picture_input_rg_cnh_frente"
+            accept="image/png, image/jpeg" />
+        </div>
+
+        <div class="foto-RG-CNH-verso">
+          <label class="picture" for="picture_input_rg_cnh_verso" tabindex="0">
+            <span class="picture_image3">RG OU CNH VERSO</span>
+          </label>
+          <input type="file" name="picture_input_rg_cnh_verso" id="picture_input_rg_cnh_verso"
+            accept="image/png, image/jpeg" />
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="layout-page s-certidao-casamento">
+      <div class="content-document">
+
+        <div class="certidao">
+          <label class="picture" for="picture_input_certidao_casamento" tabindex="0">
+            <span class="picture_image4">CERTIDÃO CASAMENTO</span>
+          </label>
+          <input type="file" name="picture_input_certidao_casamento" id="picture_input_certidao_casamento"
+            accept="image/png, image/jpeg" />
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="layout-page">
+      <div class="content-document">
+        <div class="certidao">
+          <label class="picture" for="picture_input_certidao_nascimento" tabindex="0">
+            <span class="picture_image5">CERTIDÃO DE NASCIMENTO</span>
+          </label>
+          <input type="file" name="picture_input_certidao_nascimento" id="picture_input_certidao_nascimento"
+            accept="image/png, image/jpeg, image/jpg" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- <div class="box">
+    <div class="container">
+      <div class="header">
+        <img src="logo.png" alt="" />
+      </div>
+
+      <form action="" class="form" id="form">
+        <div class="form_control">
+          <label for="username">Login</label>
+          <input type="text" id="username" placeholder="email@email.com" />
+          <i class="uil uil-exclamation-circle"></i>
+          <i class="uil uil-check-circle"></i>
+          <small>Error</small>
+        </div>
+
+        <div class="form_control">
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="Digite sua senha" />
+          <i class="icon_passaword uil uil-eye"></i>
+          <i class="uil uil-exclamation-circle"></i>
+          <i class="uil uil-check-circle"></i>
+          <small class="smallException">Error</small>
+        </div>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div> -->
+
+  <button id="btn-download-pdf" onclick="validarInputs()">Gerar PDF</button>
+  <button onclick="exportToExcel()" class="relatorio">Gerar Relatório</button>
+  <label for="upload-PDF" id="btn-anexar-pdf">Anexar Contrato</label>
+  <input id="upload-PDF" type="file">
+
+</body>
+<script src="script.js"></script>
+<!-- <script src="./contrato/scriptForm.js"></script> -->
+<script src="sweetalert2.all.min.js"></script>
+
+</html>
