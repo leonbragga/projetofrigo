@@ -25,13 +25,36 @@ input {
   outline: none;
 }
 
-input[name="nome"],
-input[name="email"] {
-  width: 320px;
+input[name="nome"]{
+  width: 600px;
+}
+
+input[name="email"]{
+  width: 300px;
 }
 
 input[name="endereco"] {
   width: 615px;
+}
+input[name="cpf"] {
+  width: 260px;
+}
+
+input[name="telefone"] {
+  width: 280px;
+}
+
+label[for="cep"] {
+  margin-left: 24px;
+}
+
+label[for="profissao"] {
+  margin-left: 15px;
+}
+
+label[for="reurb"] {
+  margin-left: 10px;
+
 }
 
 textarea[name="detalhesdopagamento"] {
@@ -43,8 +66,7 @@ textarea[name="detalhesdopagamento"] {
 
 input[name="dataPrimerioPagamento"],
 [name="contrato"],
-[name="nucleo"],
-[name="reurb"] {
+[name="nucleo"] {
   background-color: #fff;
   font-weight: bold;
   width: 140px;
@@ -174,11 +196,6 @@ h3 {
   gap: 15px;
 }
 
-.contratante div:not(:last-child) {
-  display: flex;
-  gap: 80px;
-}
-
 .estCivil {
   display: flex;
   margin-top: 5px;
@@ -223,10 +240,10 @@ h3 {
   font-weight: bold;
 }
 
-.conjuge div:not(:last-child) {
+/* .conjuge div:not(:last-child) {
   display: flex;
   gap: 80px;
-}
+} */
 
 
 .div-second label:last-child {
