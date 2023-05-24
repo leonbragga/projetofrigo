@@ -101,19 +101,19 @@ function topFunction() {
 const estCivil = document.querySelectorAll("input[type=radio]");
 let valorEstCivil = 1;
 const dadosConjuge = document.querySelector(".conjuge");
-const certCasamento = document.querySelector('.s-certidao-casamento');
+// const certCasamento = document.querySelector('.s-certidao-casamento');
 estCivil.forEach((e) => {
   e.addEventListener("click", () => {
     if (e.value === '0') {
       removeChecked();
       addChecked(e);
-      certCasamento.classList.remove('layout-page');
+      // certCasamento.classList.remove('layout-page');
       dadosConjuge.style.display = 'none';
-      certCasamento.style.display = 'none';
+      // certCasamento.style.display = 'none';
     } else {
-      certCasamento.classList.add('layout-page');
+      // certCasamento.classList.add('layout-page');
       dadosConjuge.style.display = 'block';
-      certCasamento.style.display = 'block';
+      // certCasamento.style.display = 'block';
     }
     valorEstCivil = e.value;
   })
@@ -302,124 +302,124 @@ inputFile.addEventListener("change", function (e) {
 });
 
 //RG FRENTE
-const inputFileRG_Frente = document.querySelector("#picture_input_rg_cnh_frente");
-const pictureImage2 = document.querySelector(".picture_image2");
-const pictureImageTxt2 = "RG OU CNH FRENTE";
-pictureImage2.innerHTML = pictureImageTxt2;
+// const inputFileRG_Frente = document.querySelector("#picture_input_rg_cnh_frente");
+// const pictureImage2 = document.querySelector(".picture_image2");
+// const pictureImageTxt2 = "RG OU CNH FRENTE";
+// pictureImage2.innerHTML = pictureImageTxt2;
 
-inputFileRG_Frente.addEventListener("change", function (e) {
-  const inputTarget = e.target;
-  const file = inputTarget.files[0];
+// inputFileRG_Frente.addEventListener("change", function (e) {
+//   const inputTarget = e.target;
+//   const file = inputTarget.files[0];
 
-  if (file) {
-    const reader = new FileReader();
+//   if (file) {
+//     const reader = new FileReader();
 
-    reader.addEventListener("load", function (e) {
-      const readerTarget = e.target;
+//     reader.addEventListener("load", function (e) {
+//       const readerTarget = e.target;
 
-      const img = document.createElement("img");
-      img.src = readerTarget.result;
-      img.classList.add("picture_img2");
+//       const img = document.createElement("img");
+//       img.src = readerTarget.result;
+//       img.classList.add("picture_img2");
 
-      pictureImage2.innerHTML = "";
-      pictureImage2.appendChild(img);
-    });
+//       pictureImage2.innerHTML = "";
+//       pictureImage2.appendChild(img);
+//     });
 
-    reader.readAsDataURL(file);
-  } else {
-    pictureImage2.innerHTML = pictureImageTxt2;
-  }
-});
+//     reader.readAsDataURL(file);
+//   } else {
+//     pictureImage2.innerHTML = pictureImageTxt2;
+//   }
+// });
 
 //RG VERSO
-const inputFileRG_Verso = document.querySelector("#picture_input_rg_cnh_verso");
-const pictureImage3 = document.querySelector(".picture_image3");
-const pictureImageTxt3 = "RG OU CNH VERSO";
-pictureImage2.innerHTML = pictureImageTxt2;
+// const inputFileRG_Verso = document.querySelector("#picture_input_rg_cnh_verso");
+// const pictureImage3 = document.querySelector(".picture_image3");
+// const pictureImageTxt3 = "RG OU CNH VERSO";
+// pictureImage2.innerHTML = pictureImageTxt2;
 
-inputFileRG_Verso.addEventListener("change", function (e) {
-  const inputTarget = e.target;
-  const file = inputTarget.files[0];
+// inputFileRG_Verso.addEventListener("change", function (e) {
+//   const inputTarget = e.target;
+//   const file = inputTarget.files[0];
 
-  if (file) {
-    const reader = new FileReader();
+//   if (file) {
+//     const reader = new FileReader();
 
-    reader.addEventListener("load", function (e) {
-      const readerTarget = e.target;
+//     reader.addEventListener("load", function (e) {
+//       const readerTarget = e.target;
 
-      const img = document.createElement("img");
-      img.src = readerTarget.result;
-      img.classList.add("picture_img3");
+//       const img = document.createElement("img");
+//       img.src = readerTarget.result;
+//       img.classList.add("picture_img3");
 
-      pictureImage3.innerHTML = "";
-      pictureImage3.appendChild(img);
-    });
+//       pictureImage3.innerHTML = "";
+//       pictureImage3.appendChild(img);
+//     });
 
-    reader.readAsDataURL(file);
-  } else {
-    pictureImage3.innerHTML = pictureImageTxt3;
-  }
-});
+//     reader.readAsDataURL(file);
+//   } else {
+//     pictureImage3.innerHTML = pictureImageTxt3;
+//   }
+// });
 
 //CERTIDÃO CASAMENTO
-const inputFileRG_Certidao_Casamento = document.querySelector("#picture_input_certidao_casamento");
-const pictureImage4 = document.querySelector(".picture_image4");
-const pictureImageTxt4 = "CERTIDÃO CASAMENTO";
-pictureImage4.innerHTML = pictureImageTxt4;
+// const inputFileRG_Certidao_Casamento = document.querySelector("#picture_input_certidao_casamento");
+// const pictureImage4 = document.querySelector(".picture_image4");
+// const pictureImageTxt4 = "CERTIDÃO CASAMENTO";
+// pictureImage4.innerHTML = pictureImageTxt4;
 
-inputFileRG_Certidao_Casamento.addEventListener("change", function (e) {
-  const inputTarget = e.target;
-  const file = inputTarget.files[0];
+// inputFileRG_Certidao_Casamento.addEventListener("change", function (e) {
+//   const inputTarget = e.target;
+//   const file = inputTarget.files[0];
 
-  if (file) {
-    const reader = new FileReader();
+//   if (file) {
+//     const reader = new FileReader();
 
-    reader.addEventListener("load", function (e) {
-      const readerTarget = e.target;
+//     reader.addEventListener("load", function (e) {
+//       const readerTarget = e.target;
 
-      const img = document.createElement("img");
-      img.src = readerTarget.result;
-      img.classList.add("picture_img3");
+//       const img = document.createElement("img");
+//       img.src = readerTarget.result;
+//       img.classList.add("picture_img3");
 
-      pictureImage4.innerHTML = "";
-      pictureImage4.appendChild(img);
-    });
+//       pictureImage4.innerHTML = "";
+//       pictureImage4.appendChild(img);
+//     });
 
-    reader.readAsDataURL(file);
-  } else {
-    pictureImage4.innerHTML = pictureImageTxt4;
-  }
-});
+//     reader.readAsDataURL(file);
+//   } else {
+//     pictureImage4.innerHTML = pictureImageTxt4;
+//   }
+// });
 
 //CERTIDÃO NASCIMENTO
-const inputFileRG_Certidao_Nascimento = document.querySelector("#picture_input_certidao_nascimento");
-const pictureImage5 = document.querySelector(".picture_image5");
-const pictureImageTxt5 = "CERTIDÃO NASCIMENTO";
-pictureImage5.innerHTML = pictureImageTxt5;
+// const inputFileRG_Certidao_Nascimento = document.querySelector("#picture_input_certidao_nascimento");
+// const pictureImage5 = document.querySelector(".picture_image5");
+// const pictureImageTxt5 = "CERTIDÃO NASCIMENTO";
+// pictureImage5.innerHTML = pictureImageTxt5;
 
-inputFileRG_Certidao_Nascimento.addEventListener("change", function (e) {
-  const inputTarget = e.target;
-  const file = inputTarget.files[0];
+// inputFileRG_Certidao_Nascimento.addEventListener("change", function (e) {
+//   const inputTarget = e.target;
+//   const file = inputTarget.files[0];
 
-  if (file) {
-    const reader = new FileReader();
+//   if (file) {
+//     const reader = new FileReader();
 
-    reader.addEventListener("load", function (e) {
-      const readerTarget = e.target;
+//     reader.addEventListener("load", function (e) {
+//       const readerTarget = e.target;
 
-      const img = document.createElement("img");
-      img.src = readerTarget.result;
-      img.classList.add("picture_img5");
+//       const img = document.createElement("img");
+//       img.src = readerTarget.result;
+//       img.classList.add("picture_img5");
 
-      pictureImage5.innerHTML = "";
-      pictureImage5.appendChild(img);
-    });
+//       pictureImage5.innerHTML = "";
+//       pictureImage5.appendChild(img);
+//     });
 
-    reader.readAsDataURL(file);
-  } else {
-    pictureImage5.innerHTML = pictureImageTxt5;
-  }
-});
+//     reader.readAsDataURL(file);
+//   } else {
+//     pictureImage5.innerHTML = pictureImageTxt5;
+//   }
+// });
 
 //BAIXAR ASSINATURAS
 function baixarAssinatura2() {
@@ -462,18 +462,18 @@ function validarInputs() {
   const campoInvalido = document.querySelector(".invalido");
   const detalhesdoPagamento = document.getElementById('detalhesdopagamento');
 
-  const picture_input_rg_cnh_frente = document.getElementById('picture_input_rg_cnh_frente');
-  const picture_input_rg_cnh_verso = document.getElementById('picture_input_rg_cnh_frente');
-  const picture_input_certidao_casamento = document.getElementById('picture_input_rg_cnh_frente');
-  const picture_input_certidao_nascimento = document.getElementById('picture_input_rg_cnh_frente');
-  const btnAnexarPdf = document.getElementById('btn-anexar-pdf');
-  const uploadPDF = document.getElementById('upload-PDF');
+  // const picture_input_rg_cnh_frente = document.getElementById('picture_input_rg_cnh_frente');
+  // const picture_input_rg_cnh_verso = document.getElementById('picture_input_rg_cnh_frente');
+  // const picture_input_certidao_casamento = document.getElementById('picture_input_rg_cnh_frente');
+  // const picture_input_certidao_nascimento = document.getElementById('picture_input_rg_cnh_frente');
+  // const btnAnexarPdf = document.getElementById('btn-anexar-pdf');
+  // const uploadPDF = document.getElementById('upload-PDF');
   let cont = 0;
 
   for (let i = 0; i < inputs.length; i++) {
     if (inputs[i].value.trim() === "") {
 
-      if(i != 25 && i != 26){
+      if(i != 26 && i != 27 && i != 7){
         cont += 1;
         inputs[i].style.borderBottom = "1px solid red";
       }      
@@ -515,23 +515,23 @@ function validarInputs() {
       detalhesdoPagamento.style.border = 'none';
     }
 
-    if (picture_input_rg_cnh_frente.value.trim() === "") {
-      document.querySelector(".picture_image2").style.color = "red";
-    }
-    if (picture_input_rg_cnh_verso.value.trim() === "") {
-      document.querySelector(".picture_image3").style.color = "red";
-    }
-    if (picture_input_certidao_casamento.value.trim() === "") {
-      document.querySelector(".picture_image4").style.color = "red";
-    }
-    if (picture_input_certidao_nascimento.value.trim() === "") {
-      document.querySelector(".picture_image5").style.color = "red";
-    }
-    if (uploadPDF.value.trim() === '') {
-      btnAnexarPdf.style.backgroundColor = '#eb5b5b';
-    } else {
-      btnAnexarPdf.style.backgroundColor = '#5beb62';
-    }
+    // if (picture_input_rg_cnh_frente.value.trim() === "") {
+    //   document.querySelector(".picture_image2").style.color = "red";
+    // }
+    // if (picture_input_rg_cnh_verso.value.trim() === "") {
+    //   document.querySelector(".picture_image3").style.color = "red";
+    // }
+    // if (picture_input_certidao_casamento.value.trim() === "") {
+    //   document.querySelector(".picture_image4").style.color = "red";
+    // }
+    // if (picture_input_certidao_nascimento.value.trim() === "") {
+    //   document.querySelector(".picture_image5").style.color = "red";
+    // }
+    // if (uploadPDF.value.trim() === '') {
+    //   btnAnexarPdf.style.backgroundColor = '#eb5b5b';
+    // } else {
+    //   btnAnexarPdf.style.backgroundColor = '#5beb62';
+    // }
 
   }
 
