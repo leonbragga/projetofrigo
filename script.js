@@ -9,7 +9,7 @@ function pegarData() {
   spanDataAtual.textContent = dataAtual;
 }
 
-function salvarPDF() {
+async function gerarPDF() {
   const nome = document.getElementById("nome");
   const opt = {
     filename: `${contrato.value}` + " - " + `${nome.value}`,
@@ -54,9 +54,64 @@ function salvarPDF() {
         .toCanvas()
         .toPdf();
     });
+
   }
 
-  worker.save(); 
+  return worker.output('blob');
+}
+
+
+function salvarPDFsemContrato() {
+  const nome = document.getElementById("nome");
+  const opt = {
+    filename: `${contrato.value}` + " - " + `${nome.value}`,
+    image: {
+      type: "jpge",
+      quality: 0.98,
+    },
+
+    margin: 0,
+
+    html2canvas: {
+      dpi: 192,
+      letterRendering: true,
+      allowTaint: true,
+      logging: true,
+
+    },
+
+    jsPDF: {
+      unit: "mm",
+      format: "a4",
+      orientation: "portrait",
+      compress: true,
+    },
+  };
+
+  const elements = Array.from(document.querySelectorAll(".layout-page"));
+
+  let worker = html2pdf()
+    .set(opt)
+    .from(elements[0]);
+
+  if (elements.length > 1) {
+    worker = worker.toPdf();
+
+    elements.slice(1).forEach(async element => {
+      worker = worker
+        .get('pdf')
+        .then(pdf => {
+          pdf.addPage();
+        })
+        .from(element)
+        .toContainer()
+        .toCanvas()
+        .toPdf();
+    });
+  }
+
+  worker.save();
+
 }
 
 
@@ -68,11 +123,15 @@ function atualizarInformacoes() {
   let reurb = document.getElementById("reurb");
   let atualizarNumeroReurb = document.querySelectorAll(".numeroReurb");
   let nome = document.getElementById("nome");
+  let nomeConjuge = document.getElementById("nomeConjuge");
   let nomeCliente = document.getElementById("nomeCliente");
   let valorContrato = document.getElementById("valor");
   let valorContratoAtualizar = document.getElementById("valorContrato");
   let email = document.getElementById("email");
   let emailBoleto = document.getElementById("emailBoleto");
+
+  nome.addEventListener('keyup', converterParaMaiusculo);
+  nomeConjuge.addEventListener('keyup', converterParaMaiusculoC);
 
   atualizarNumeroDeContratos.forEach((item, index) => {
     atualizarNumeroDeContratos[index].textContent = numeroContrato.value;
@@ -88,9 +147,22 @@ function atualizarInformacoes() {
 
   valorContratoAtualizar.textContent = "R$ " + valorContrato.value;
 
-  // emailBoleto.textContent = email.value;
+  emailBoleto.textContent = email.value;
 
   nomeCliente.textContent = nome.value;
+}
+
+
+function converterParaMaiusculo() {
+  var input = document.getElementById('nome');
+  var valor = input.value;
+  input.value = valor.toUpperCase();
+}
+
+function converterParaMaiusculoC() {
+  var input = document.getElementById('nomeConjuge');
+  var valor = input.value;
+  input.value = valor.toUpperCase();
 }
 
 function topFunction() {
@@ -101,19 +173,19 @@ function topFunction() {
 const estCivil = document.querySelectorAll("input[type=radio]");
 let valorEstCivil = 1;
 const dadosConjuge = document.querySelector(".conjuge");
-// const certCasamento = document.querySelector('.s-certidao-casamento');
+const certCasamento = document.querySelector('.s-certidao-casamento');
 estCivil.forEach((e) => {
   e.addEventListener("click", () => {
     if (e.value === '0') {
       removeChecked();
       addChecked(e);
-      // certCasamento.classList.remove('layout-page');
+      certCasamento.classList.remove('layout-page');
       dadosConjuge.style.display = 'none';
-      // certCasamento.style.display = 'none';
+      certCasamento.style.display = 'none';
     } else {
-      // certCasamento.classList.add('layout-page');
+      certCasamento.classList.add('layout-page');
       dadosConjuge.style.display = 'block';
-      // certCasamento.style.display = 'block';
+      certCasamento.style.display = 'block';
     }
     valorEstCivil = e.value;
   })
@@ -302,124 +374,124 @@ inputFile.addEventListener("change", function (e) {
 });
 
 //RG FRENTE
-// const inputFileRG_Frente = document.querySelector("#picture_input_rg_cnh_frente");
-// const pictureImage2 = document.querySelector(".picture_image2");
-// const pictureImageTxt2 = "RG OU CNH FRENTE";
-// pictureImage2.innerHTML = pictureImageTxt2;
+const inputFileRG_Frente = document.querySelector("#picture_input_rg_cnh_frente");
+const pictureImage2 = document.querySelector(".picture_image2");
+const pictureImageTxt2 = "RG OU CNH FRENTE";
+pictureImage2.innerHTML = pictureImageTxt2;
 
-// inputFileRG_Frente.addEventListener("change", function (e) {
-//   const inputTarget = e.target;
-//   const file = inputTarget.files[0];
+inputFileRG_Frente.addEventListener("change", function (e) {
+  const inputTarget = e.target;
+  const file = inputTarget.files[0];
 
-//   if (file) {
-//     const reader = new FileReader();
+  if (file) {
+    const reader = new FileReader();
 
-//     reader.addEventListener("load", function (e) {
-//       const readerTarget = e.target;
+    reader.addEventListener("load", function (e) {
+      const readerTarget = e.target;
 
-//       const img = document.createElement("img");
-//       img.src = readerTarget.result;
-//       img.classList.add("picture_img2");
+      const img = document.createElement("img");
+      img.src = readerTarget.result;
+      img.classList.add("picture_img2");
 
-//       pictureImage2.innerHTML = "";
-//       pictureImage2.appendChild(img);
-//     });
+      pictureImage2.innerHTML = "";
+      pictureImage2.appendChild(img);
+    });
 
-//     reader.readAsDataURL(file);
-//   } else {
-//     pictureImage2.innerHTML = pictureImageTxt2;
-//   }
-// });
+    reader.readAsDataURL(file);
+  } else {
+    pictureImage2.innerHTML = pictureImageTxt2;
+  }
+});
 
 //RG VERSO
-// const inputFileRG_Verso = document.querySelector("#picture_input_rg_cnh_verso");
-// const pictureImage3 = document.querySelector(".picture_image3");
-// const pictureImageTxt3 = "RG OU CNH VERSO";
-// pictureImage2.innerHTML = pictureImageTxt2;
+const inputFileRG_Verso = document.querySelector("#picture_input_rg_cnh_verso");
+const pictureImage3 = document.querySelector(".picture_image3");
+const pictureImageTxt3 = "RG OU CNH VERSO";
+pictureImage2.innerHTML = pictureImageTxt2;
 
-// inputFileRG_Verso.addEventListener("change", function (e) {
-//   const inputTarget = e.target;
-//   const file = inputTarget.files[0];
+inputFileRG_Verso.addEventListener("change", function (e) {
+  const inputTarget = e.target;
+  const file = inputTarget.files[0];
 
-//   if (file) {
-//     const reader = new FileReader();
+  if (file) {
+    const reader = new FileReader();
 
-//     reader.addEventListener("load", function (e) {
-//       const readerTarget = e.target;
+    reader.addEventListener("load", function (e) {
+      const readerTarget = e.target;
 
-//       const img = document.createElement("img");
-//       img.src = readerTarget.result;
-//       img.classList.add("picture_img3");
+      const img = document.createElement("img");
+      img.src = readerTarget.result;
+      img.classList.add("picture_img3");
 
-//       pictureImage3.innerHTML = "";
-//       pictureImage3.appendChild(img);
-//     });
+      pictureImage3.innerHTML = "";
+      pictureImage3.appendChild(img);
+    });
 
-//     reader.readAsDataURL(file);
-//   } else {
-//     pictureImage3.innerHTML = pictureImageTxt3;
-//   }
-// });
+    reader.readAsDataURL(file);
+  } else {
+    pictureImage3.innerHTML = pictureImageTxt3;
+  }
+});
 
 //CERTIDÃO CASAMENTO
-// const inputFileRG_Certidao_Casamento = document.querySelector("#picture_input_certidao_casamento");
-// const pictureImage4 = document.querySelector(".picture_image4");
-// const pictureImageTxt4 = "CERTIDÃO CASAMENTO";
-// pictureImage4.innerHTML = pictureImageTxt4;
+const inputFileRG_Certidao_Casamento = document.querySelector("#picture_input_certidao_casamento");
+const pictureImage4 = document.querySelector(".picture_image4");
+const pictureImageTxt4 = "CERTIDÃO CASAMENTO";
+pictureImage4.innerHTML = pictureImageTxt4;
 
-// inputFileRG_Certidao_Casamento.addEventListener("change", function (e) {
-//   const inputTarget = e.target;
-//   const file = inputTarget.files[0];
+inputFileRG_Certidao_Casamento.addEventListener("change", function (e) {
+  const inputTarget = e.target;
+  const file = inputTarget.files[0];
 
-//   if (file) {
-//     const reader = new FileReader();
+  if (file) {
+    const reader = new FileReader();
 
-//     reader.addEventListener("load", function (e) {
-//       const readerTarget = e.target;
+    reader.addEventListener("load", function (e) {
+      const readerTarget = e.target;
 
-//       const img = document.createElement("img");
-//       img.src = readerTarget.result;
-//       img.classList.add("picture_img3");
+      const img = document.createElement("img");
+      img.src = readerTarget.result;
+      img.classList.add("picture_img3");
 
-//       pictureImage4.innerHTML = "";
-//       pictureImage4.appendChild(img);
-//     });
+      pictureImage4.innerHTML = "";
+      pictureImage4.appendChild(img);
+    });
 
-//     reader.readAsDataURL(file);
-//   } else {
-//     pictureImage4.innerHTML = pictureImageTxt4;
-//   }
-// });
+    reader.readAsDataURL(file);
+  } else {
+    pictureImage4.innerHTML = pictureImageTxt4;
+  }
+});
 
 //CERTIDÃO NASCIMENTO
-// const inputFileRG_Certidao_Nascimento = document.querySelector("#picture_input_certidao_nascimento");
-// const pictureImage5 = document.querySelector(".picture_image5");
-// const pictureImageTxt5 = "CERTIDÃO NASCIMENTO";
-// pictureImage5.innerHTML = pictureImageTxt5;
+const inputFileRG_Certidao_Nascimento = document.querySelector("#picture_input_certidao_nascimento");
+const pictureImage5 = document.querySelector(".picture_image5");
+const pictureImageTxt5 = "CERTIDÃO NASCIMENTO";
+pictureImage5.innerHTML = pictureImageTxt5;
 
-// inputFileRG_Certidao_Nascimento.addEventListener("change", function (e) {
-//   const inputTarget = e.target;
-//   const file = inputTarget.files[0];
+inputFileRG_Certidao_Nascimento.addEventListener("change", function (e) {
+  const inputTarget = e.target;
+  const file = inputTarget.files[0];
 
-//   if (file) {
-//     const reader = new FileReader();
+  if (file) {
+    const reader = new FileReader();
 
-//     reader.addEventListener("load", function (e) {
-//       const readerTarget = e.target;
+    reader.addEventListener("load", function (e) {
+      const readerTarget = e.target;
 
-//       const img = document.createElement("img");
-//       img.src = readerTarget.result;
-//       img.classList.add("picture_img5");
+      const img = document.createElement("img");
+      img.src = readerTarget.result;
+      img.classList.add("picture_img5");
 
-//       pictureImage5.innerHTML = "";
-//       pictureImage5.appendChild(img);
-//     });
+      pictureImage5.innerHTML = "";
+      pictureImage5.appendChild(img);
+    });
 
-//     reader.readAsDataURL(file);
-//   } else {
-//     pictureImage5.innerHTML = pictureImageTxt5;
-//   }
-// });
+    reader.readAsDataURL(file);
+  } else {
+    pictureImage5.innerHTML = pictureImageTxt5;
+  }
+});
 
 //BAIXAR ASSINATURAS
 function baixarAssinatura2() {
@@ -462,21 +534,21 @@ function validarInputs() {
   const campoInvalido = document.querySelector(".invalido");
   const detalhesdoPagamento = document.getElementById('detalhesdopagamento');
 
-  // const picture_input_rg_cnh_frente = document.getElementById('picture_input_rg_cnh_frente');
-  // const picture_input_rg_cnh_verso = document.getElementById('picture_input_rg_cnh_frente');
-  // const picture_input_certidao_casamento = document.getElementById('picture_input_rg_cnh_frente');
-  // const picture_input_certidao_nascimento = document.getElementById('picture_input_rg_cnh_frente');
-  // const btnAnexarPdf = document.getElementById('btn-anexar-pdf');
-  // const uploadPDF = document.getElementById('upload-PDF');
+  const picture_input_rg_cnh_frente = document.getElementById('picture_input_rg_cnh_frente');
+  const picture_input_rg_cnh_verso = document.getElementById('picture_input_rg_cnh_frente');
+  const picture_input_certidao_casamento = document.getElementById('picture_input_rg_cnh_frente');
+  const picture_input_certidao_nascimento = document.getElementById('picture_input_rg_cnh_frente');
+  const btnAnexarPdf = document.getElementById('btn-anexar-pdf');
+  const uploadPDF = document.getElementById('upload-PDF');
   let cont = 0;
 
   for (let i = 0; i < inputs.length; i++) {
     if (inputs[i].value.trim() === "") {
 
-      if(i != 26 && i != 27 && i != 7){
+      if (i != 26 && i != 27 && i != 7 && i != 40 ) {
         cont += 1;
         inputs[i].style.borderBottom = "1px solid red";
-      }      
+      }
 
       if (detalhesdoPagamento.value == '') {
         cont += 1;
@@ -492,6 +564,7 @@ function validarInputs() {
         cont += 1;
         campoInvalido.style.borderBottom = "1px solid red";
       }
+      
     }
 
     if (pictureInput.value.trim() === "") {
@@ -515,53 +588,71 @@ function validarInputs() {
       detalhesdoPagamento.style.border = 'none';
     }
 
-    // if (picture_input_rg_cnh_frente.value.trim() === "") {
-    //   document.querySelector(".picture_image2").style.color = "red";
-    // }
-    // if (picture_input_rg_cnh_verso.value.trim() === "") {
-    //   document.querySelector(".picture_image3").style.color = "red";
-    // }
-    // if (picture_input_certidao_casamento.value.trim() === "") {
-    //   document.querySelector(".picture_image4").style.color = "red";
-    // }
-    // if (picture_input_certidao_nascimento.value.trim() === "") {
-    //   document.querySelector(".picture_image5").style.color = "red";
-    // }
-    // if (uploadPDF.value.trim() === '') {
-    //   btnAnexarPdf.style.backgroundColor = '#eb5b5b';
-    // } else {
-    //   btnAnexarPdf.style.backgroundColor = '#5beb62';
-    // }
+    if (picture_input_rg_cnh_frente.value.trim() === "") {
+      document.querySelector(".picture_image2").style.color = "red";
+    }
+    if (picture_input_rg_cnh_verso.value.trim() === "") {
+      document.querySelector(".picture_image3").style.color = "red";
+    }
+    if (picture_input_certidao_casamento.value.trim() === "") {
+      document.querySelector(".picture_image4").style.color = "red";
+    }
+    if (picture_input_certidao_nascimento.value.trim() === "") {
+      document.querySelector(".picture_image5").style.color = "red";
+    }
+    if (uploadPDF.value.trim() === '') {
+      btnAnexarPdf.style.backgroundColor = '#eb5b5b';
+    } else {
+      btnAnexarPdf.style.backgroundColor = '#5beb62';
+    }
 
   }
 
   
   if (valorEstCivil == '0') {
-    cont = cont - 7;
+    cont = cont - 12;
   }
-    if (cont <= 13) {
-      Swal.fire({
-        backgroundColor: "#00254c",
-        color: "#00254c",
-        title: "Deseja salvar?",
-        icon: "warning",
-        showCancelButton: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          topFunction();
+
+  // if (uploadPDF.value.trim() === '') {
+  //   cont = cont + 4;
+  // }else{
+  //   cont = cont + 7;
+  // }
+  
+
+  if (cont <= 6) {
+    Swal.fire({
+      backgroundColor: "#00254c",
+      color: "#00254c",
+      title: "Deseja salvar?",
+      icon: "warning",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        topFunction();
+
+        if(document.getElementById('upload-PDF').files[0]){
           salvarPDF();
           // gerarNovoNumeroContrato();
           // setTimeout(() => {
-            //   salvarPDF();
-            // }, 6000)
-          }
-        });
-      } else {
-        Swal.fire({
-          title: "Contrato incompleto",
-          icon: "info",
-        });
+          //   salvarPDFsemContrato();
+          // }, 6000)
+        }else{
+          salvarPDFsemContrato();
+          // gerarNovoNumeroContrato();
+          // setTimeout(() => {
+          //   salvarPDFsemContrato();
+          // }, 6000)
+        }
+
       }
+    });
+  } else {
+    Swal.fire({
+      title: "Contrato incompleto",
+      icon: "info",
+    });
+  }
 
   console.log(cont);
 }
@@ -684,3 +775,79 @@ function s2ab(s) {
   }
   return buf;
 }
+
+// Função para manipular o evento de seleção de arquivo pelo usuário
+function salvarPDF() {
+  const file = document.getElementById('upload-PDF').files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const pdfFile = new Blob([reader.result]);
+      try {
+        const pdfPart = await gerarPDF();
+        mergeBlobsAndDownload(pdfPart, pdfFile);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    reader.onerror = (error) => {
+      console.error(error);
+    };
+    reader.readAsArrayBuffer(file);
+  }
+}
+
+async function mergeBlobsAndDownload(blob1, blob2) {
+  // Crie uma instância do PDFDocument
+  const { PDFDocument, StandardFonts } = PDFLib;
+  const pdfDoc = await PDFDocument.create();
+
+  // Carregue o conteúdo dos blobs como arrays de bytes
+  const bytes1 = await blob1.arrayBuffer();
+  const bytes2 = await blob2.arrayBuffer();
+
+  // Carregue os documentos PDF dos blobs
+  const existingPdfDoc1 = await PDFDocument.load(bytes1);
+  const existingPdfDoc2 = await PDFDocument.load(bytes2);
+
+  // Copie as páginas do primeiro documento PDF para o novo documento
+  const pages1 = await pdfDoc.copyPages(existingPdfDoc1, existingPdfDoc1.getPageIndices());
+  pages1.forEach((page) => {
+    pdfDoc.addPage(page);
+  });
+
+  // Copie as páginas do segundo documento PDF para o novo documento
+  const pages2 = await pdfDoc.copyPages(existingPdfDoc2, existingPdfDoc2.getPageIndices());
+  pages2.forEach((page) => {
+    pdfDoc.addPage(page);
+  });
+
+  // Obtenha o conteúdo em formato de array de bytes do novo documento PDF
+  const pdfBytes = await pdfDoc.save();
+
+  // Crie um novo Blob a partir do array de bytes do PDF
+  const mergedBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+  // Crie um URL temporário para o Blob
+  const mergedBlobUrl = URL.createObjectURL(mergedBlob);
+
+  // Crie um link de download e defina o URL do Blob como o destino
+  const nome = document.getElementById("nome");
+  const downloadLink = document.createElement('a');
+  downloadLink.href = mergedBlobUrl;
+  downloadLink.download = `${contrato.value}` + " - " + `${nome.value}`;
+
+  // Adicione o link de download ao documento e clique automaticamente nele para iniciar o download
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+
+  // Remova o link de download e revogue o URL temporário
+  document.body.removeChild(downloadLink);
+  URL.revokeObjectURL(mergedBlobUrl);
+}
+
+
+
+
+
+
