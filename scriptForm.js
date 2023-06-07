@@ -1,5 +1,7 @@
 const username = document.getElementById('username');
 const password = document.getElementById('password');
+const nomeTestemunha02 = document.getElementById('nomeTestemunha02');
+const cpfTestemunha = document.getElementById('cpfTestemunha');
 
 
 form.addEventListener('submit', (e) => {
@@ -49,6 +51,8 @@ function checkInputs() {
             setErrorFor(password,
                 `Senha incorreta`);
         } else {
+            nomeTestemunha02.value = 'MARCIO SILVESTRI';
+            cpfTestemunha.value = '061.549.959-70';
             setSuccesFor(password);
             return 1;
         }
@@ -61,6 +65,8 @@ function checkInputs() {
             setErrorFor(password,
                 `Senha incorreta`);
         } else {
+            nomeTestemunha02.value = 'MARILENE RAUBER';
+            cpfTestemunha.value = '047.882.029-13';            
             setSuccesFor(password);
             return 1;
         }
