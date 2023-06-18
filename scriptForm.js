@@ -2,6 +2,8 @@ const username = document.getElementById('username');
 const password = document.getElementById('password');
 const nomeTestemunha02 = document.getElementById('nomeTestemunha02');
 const cpfTestemunha = document.getElementById('cpfTestemunha');
+// console.log(nomeTestemunha02.value)
+// console.log(cpfTestemunha.value)
 
 
 form.addEventListener('submit', (e) => {
