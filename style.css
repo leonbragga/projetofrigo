@@ -429,7 +429,7 @@ h3 {
   opacity: 0;
   pointer-events: none;
   z-index: 0;
-  cursor: url('../penIcon.png') 0 30,
+  cursor: url('penIcon.png') 0 30,
     progress;
 }
 
@@ -476,7 +476,7 @@ h3 {
 .canvas .salvar {
   width: 24px;
   height: 24px;
-  background-image: url('../save.svg');
+  background-image: url('save.svg');
   top: 10px;
   right: 10px;
 }
@@ -484,7 +484,7 @@ h3 {
 .canvas .limpar {
   width: 25px;
   height: 25px;
-  background-image: url('../delete.svg');
+  background-image: url('delete.svg');
   top: 8px;
   right: 50px;
   color: aqua;
@@ -494,7 +494,7 @@ h3 {
 .download2 {
   width: 27px;
   height: 27px;
-  background-image: url('../download.svg');
+  background-image: url('download.svg');
   top: 8px;
   right: 90px;
 }
@@ -507,7 +507,7 @@ h3 {
 .canvas .upload {
   width: 26px;
   height: 26px;
-  background-image: url('../upload.svg');
+  background-image: url('upload.svg');
   top: 9px;
   right: 135px;
 }
