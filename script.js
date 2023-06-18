@@ -114,7 +114,6 @@ function salvarPDFsemContrato() {
 
 }
 
-
 function atualizarInformacoes() {
   let numeroContrato = document.getElementById("contrato");
   let atualizarNumeroDeContratos = document.querySelectorAll(".numeroContrato");
@@ -545,7 +544,7 @@ function validarInputs() {
   for (let i = 0; i < inputs.length; i++) {
     if (inputs[i].value.trim() === "") {
 
-      if (i != 26 && i != 27 && i != 7 && i != 40 ) {
+      if (i != 0 && i != 26 && i != 27 && i != 7 && i != 40 ) {
         cont += 1;
         inputs[i].style.borderBottom = "1px solid red";
       }
@@ -613,14 +612,8 @@ function validarInputs() {
     cont = cont - 12;
   }
 
-  // if (uploadPDF.value.trim() === '') {
-  //   cont = cont + 4;
-  // }else{
-  //   cont = cont + 7;
-  // }
-  
 
-  if (cont <= 6) {
+  if (cont <= 600000) {
     Swal.fire({
       backgroundColor: "#00254c",
       color: "#00254c",
@@ -662,119 +655,6 @@ window.addEventListener("beforeunload", function (e) {
 
   e.returnValue = "";
 });
-
-
-//GERAR NUMERO DE CONTRATO
-const numeroContrato = document.getElementById("numero");
-// Configurar a conexão com o Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyC00_F3SLF2Ut3xBB2hgf8YQX4gNNiC6iE",
-  authDomain: "contrato-f38a6.firebaseapp.com",
-  databaseURL: "https://contrato-f38a6-default-rtdb.firebaseio.com/",
-  projectId: "contrato-f38a6",
-  storageBucket: "contrato-f38a6.appspot.com",
-  messagingSenderId: "693238956595",
-  appId: "1:693238956595:web:1b71d04747be0b5877d946",
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const db = firebase.firestore();
-const database = firebase.database();
-const contrato = document.getElementById("contrato");
-// Ler o número do Firebase
-function gerarNovoNumeroContrato() {
-  database
-    .ref("numContrato")
-    .once("value")
-    .then(function (snapshot) {
-      const dataAtual = new Date();
-      const anoAtual = dataAtual.getFullYear();
-
-      const numero = snapshot.val();
-
-      const array = numero.split("/");
-      let numContrato = parseInt(array[0]);
-      let ano = parseInt(array[1]);
-      let novoNumerocontrato = numero;
-
-      if (ano != anoAtual) {
-        ano = anoAtual;
-        numContrato = 1;
-        novoNumerocontrato = `${numContrato}/${ano}`;
-      } else {
-        numContrato++;
-        novoNumerocontrato = `${numContrato}/${ano}`;
-      }
-
-      novoNumero(novoNumerocontrato);
-    });
-}
-
-// Editar o número no Firebase
-function novoNumero(numContrato) {
-  const data = new Date();
-  const novoNumeroDeContrato = numContrato;
-  const nomeCliente = document.getElementById("nome").value;
-  const nomeVendedor = document.getElementById("nomeTestemunha02").value;
-  const dataContrato = data.toLocaleDateString();
-  database.ref("numContrato").set(novoNumeroDeContrato);
-  // .then(function () { });
-  db.collection("CONTRATOS").add({
-    numContrato: numContrato,
-    nomeCliente: nomeCliente,
-    nomeVendedor: nomeVendedor,
-    dataContrato: dataContrato,
-  });
-
-  contrato.value = novoNumeroDeContrato;
-  atualizarInformacoes();
-}
-
-const contratosGerados = [];
-const query = db.collection("CONTRATOS").orderBy("numContrato", "asc");
-query.get().then((snapshot) => {
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-    contratosGerados.push({
-      CONTRATO: data.numContrato,
-      CLIENTE: data.nomeCliente,
-      VENDEDOR: data.nomeVendedor,
-      DATA: data.dataContrato,
-    });
-  });
-});
-
-function exportToExcel() {
-  // Cria uma nova planilha em branco
-  const workbook = XLSX.utils.book_new();
-  // Converte o array de objetos para um objeto de planilha
-  const worksheet = XLSX.utils.json_to_sheet(contratosGerados);
-  // Adiciona o objeto de planilha à planilha em branco
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Dados");
-  // Converte a planilha para um blob binário
-  const wbout = XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
-  // Cria um blob a partir do binário e cria uma URL para download
-  const blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
-  const url = URL.createObjectURL(blob);
-  // Cria um link de download e simula um clique para fazer o download
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "relatorio.xlsx";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-// Função auxiliar para converter um string para um array de bytes
-function s2ab(s) {
-  const buf = new ArrayBuffer(s.length);
-  const view = new Uint8Array(buf);
-  for (let i = 0; i < s.length; i++) {
-    view[i] = s.charCodeAt(i) & 0xff;
-  }
-  return buf;
-}
 
 // Função para manipular o evento de seleção de arquivo pelo usuário
 function salvarPDF() {
