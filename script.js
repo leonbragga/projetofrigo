@@ -432,6 +432,36 @@ inputFileRG_Verso.addEventListener("change", function (e) {
   }
 });
 
+//COMPROVANTE DE RESIDENCIA
+const inputFile_comprovante_residencia = document.querySelector("#picture_input_comprovante_residencia");
+const pictureImage6 = document.querySelector(".picture_image6");
+const pictureImageTxt6 = "COMPROVANTE DE RESIDÊNCIA";
+pictureImage6.innerHTML = pictureImageTxt6;
+
+inputFile_comprovante_residencia.addEventListener("change", function (e) {
+  const inputTarget = e.target;
+  const file = inputTarget.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function (e) {
+      const readerTarget = e.target;
+
+      const img = document.createElement("img");
+      img.src = readerTarget.result;
+      img.classList.add("picture_img8");
+
+      pictureImage6.innerHTML = "";
+      pictureImage6.appendChild(img);
+    });
+
+    reader.readAsDataURL(file);
+  } else {
+    pictureImage6.innerHTML = pictureImageTxt6;
+  }
+});
+
 //CERTIDÃO CASAMENTO
 const inputFileRG_Certidao_Casamento = document.querySelector("#picture_input_certidao_casamento");
 const pictureImage4 = document.querySelector(".picture_image4");
