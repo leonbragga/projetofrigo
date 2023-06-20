@@ -2,15 +2,19 @@
 <html lang="pt-br">
 
 <head>
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
+  <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
   <script src="signaturepad.js"></script>
   <script src="pdflib.js"></script>
   <script src="pdflib2.js"></script>
   <script src="html2pdf.js"></script>
-
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1115,6 +1119,21 @@
         </div>
       </div>
 
+
+    </div>
+
+    <div class="layout-page comprovante-residencia">
+      <div class="content-document">
+
+        <div class="certidao">
+          <label class="picture" for="picture_input_comprovante_residencia" tabindex="0">
+            <span class="picture_image6">COMPROVANTE DE RESIDÊNCIA</span>
+          </label>
+          <input type="file" name="picture_input_comprovante_residencia" id="picture_input_comprovante_residencia"
+            accept="image/png, image/jpeg" />
+        </div>
+
+      </div>
 
     </div>
 
